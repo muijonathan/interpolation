@@ -1,0 +1,215 @@
+\section{General Properties of Interpolation Spaces}
+Main reference: Bergh \& L\"{o}fstr\"{o}m.
+
+\subsection{Categorical notions}
+A \emph{category} $\mathscr{C}$ consists of \emph{objects} $A,B,C,\ldots$ and \emph{morphisms}, which are mappings between objects. We write $T:A\to B$ for the morphism $T$ that maps $A$ to $B$. Given morphisms $T:A\to B$ and $S:B\to C$, there is a morphism $ST$, the composition of $S$ with $T$, such that $ST:A\to C$. The composition is associative: if $R,S,T$ are morphisms, then
+\begin{equation*}
+    T(SR) = (TS)R.
+\end{equation*}
+Finally, for every object $A\in\mathscr{C}$, there exists an \emph{identity} morphism $I_A$ such that for all morphisms $T:A\to A$, it holds that
+\begin{equation*}
+    TI_A = I_AT = T.
+\end{equation*}
+The morphisms in a category are typically `structure preserving maps'. Thus, for example, in the category \textbf{Top} of topological spaces, the morphisms are continuous maps. In these notes, we work almost exclusively with the category of normed vector spaces \textbf{NVS}. In this setting, the morphisms in \textbf{NVS} are \emph{bounded linear operators}.
+
+Let $\mathscr{C}_1, \mathscr{C}$ be two categories. A \emph{(covariant) functor} $F:\mathscr{C}_1 \to \mathscr{C}$ is a rule that assigns to every object $A\in\mathscr{C}_1$ an object $F(A)\in\mathscr{C}$, and to every morphism $T\in\mathscr{C}_1$ there corresponds a morphism $F(T)\in \mathscr{C}$. This correspondence satisfies
+\begin{enumerate}[(i)]
+    \item $F(I_A) = I_{F(A)}$;
+    \item If $T:A\to B$ in $\mathscr{C}_1$, then $F(T):F(A)\to F(B)$ in $\mathscr{C}$; and 
+    \item $F(ST)=F(S)F(T)$ for all morphisms $S,T\in\mathscr{C}_1$.
+\end{enumerate}
+
+If $\mathscr{C}_1$ is a category such that every object and every morphism in $\mathscr{C}_1$ is respectively an object and morphism in $\mathscr{C}$, then we say that $\mathscr{C}_1$ is a \emph{subcategory} of $\mathscr{C}$ if $F(A)=A$ and $F(T)=T$ defines a functor from $\mathscr{C}_1$ to $\mathscr{C}$.
+
+\subsection{Couples of normed vector spaces}
+Let us recall the following fundamental fact about Banach spaces.
+
+\begin{lemma}
+\label{lem:abs-converge}
+Let $E$ be a normed vector space. Then $E$ is complete (i.e.\ it is a Banach space) if and only if every absolutely convergent series is convergent, i.e.\ $\sum_{n=1}^\infty \|x_n\|<\infty$ implies that there exists $x\in E$ such that $\lim_{n\to\infty}\sum_{k=1}^n x_k = x$ in $E$.
+\end{lemma}
+
+\begin{definition}
+Let $A_0, A_1$ be topological vector spaces (TVS). We say that $A_0$ and $A_1$ are \emph{compatible} if there is a (Hausdorff) topological vector space $X$ such that $A_0, A_1$ are subspaces of $X$. Then the sum $A_0+A_1$ and intersection $A_0\cap A_1$ are well-defined.
+\end{definition}
+
+\begin{remark}
+The Hausdorff condition appears in Bergh \& L\"{o}fstr\"{o}m, but according to the conventions of Rudin, for example, all TVS' are Hausdorff already.
+
+In many applications, we will have $A_1 \hookrightarrow A_0$, so we may take $X=A_0$. Then clearly $A_0+A_1=A_0$ and $A_0\cap A_1=A_1$.
+\end{remark}
+
+\begin{lemma}
+\label{lem:compatible}
+Let $A_0, A_1$ be compatible normed vector spaces. Then $A_0\cap A_1$ and $A_0+A_1$ are normed vector spaces with respective norms
+\begin{align*}
+    \|x\|_{A_0\cap A_1} &= \max\{ \|x\|_{A_0}, \|x\|_{A_1} \} \\
+    \|x\|_{A_0+A_1} &= \inf\{ \|x_0\|_{A_0}+\|x_1\|_{A_1} : x=x_0+x_1 \}.
+\end{align*}
+If $A_0$ and $A_1$ are complete, then $A_0\cap A_1$ and $A_0+A_1$ are also complete.
+\end{lemma}
+\begin{proof}
+It is clear that $A_0\cap A_1$ and $A_0+A_1$ are vector spaces. We verify the triangle inequality. If $x,y\in A_0\cap A_1$, then observe that
+\begin{equation*}
+    \|x+y\|_{A_i} \le \|x\|_{A_i} + \|y\|_{A_i} \le \|x\|_{A_0\cap A_1} + \|y\|_{A_0\cap A_1}
+\end{equation*}
+for $i=0,1$. Thus the functional $\|\cdot\|_{A_0\cap A_1}$ defines a norm on $A_0\cap A_1$ (the other properties of the norm are obvious). If $x,y\in A_0+A_1$, then there exist $x_i, y_i \in A_i$ respectively for $i=0,1$ such that $x=x_0+x_1$ and $y=y_0+y_1$. Hence
+\begin{equation*}
+    \|x+y\|_{A_0+A_1} \le \|x_0+y_0\|_{A_0} + \|x_1+y_1\|_{A_1} \le (\|x_0\|_{A_0}+\|x_1\|_{A_1}) + (\|y_0\|_{A_0}+\|y_1\|_{A_1}).
+\end{equation*}
+Upon taking the infimum over all possible decompositions $x=x_0+x_1$ and $y=y_0+y_1$, we obtain $\|x+y\|_{A_0+A_1}\le\|x\|_{A_0+A_1}+\|y\|_{A_0+A_1}$, so $\|\cdot\|_{A_0+A_1}$ defines a norm on $A_0+A_1$.
+
+Now assume $A_0,A_1$ are complete. In particular, these are closed subspaces of $X$, a Hausdorff topological vector space. Hence $A_0\cap A_1$ is closed in $X$, and thus closed in the subspace topology of $A_0$ (or $A_1$). It follows that $A_0\cap A_1$ is complete. To prove the completeness of $A_0+A_1$, we use Lemma~\ref{lem:abs-converge}. Assume that $(x_n)$ is a sequence in $A_0+A_1$ such that
+\begin{equation*}
+    \sum_{n=1}^\infty \|x_n\|_{A_0+A_1} < \infty.
+\end{equation*}
+Then for each $n$ we may find a decomposition $x_n=x_n^0+x_n^1$, and $\|x_n^0\|_{A_0}+\|x_n^1\|_{A_1} \le 2\|x_n\|_{A_0+A_1}$. It follows that
+\begin{equation*}
+    \sum_{n=1}^\infty \|x_n^0\|_{A_0} < \infty, \quad \sum_{n=1}^\infty \|x_n^1\|_{A_1} < \infty.
+\end{equation*}
+By the completeness of $A_0$ and $A_1$, $\sum x_n^0$ converges to some $x^0$ in $A_0$, and $\sum x_n^1$ converges to some $x^1$ in $A_1$. Setting $x=x^0+x^1 \in A_0+A_1$, we find
+\begin{equation*}
+    \norm{x-\sum_{n=1}^N x_n}_{A_0+A_1} \le \norm{x^0-\sum_{n=1}^N x_n^0}_{A_0} + \norm{x^1-\sum_{n=1}^N x_n^1}_{A_1}
+\end{equation*}
+and therefore $\sum_{n=1}^N x_n$ converges to $x$ in $A_0+A_1$ as $N\to\infty$. The conclusion follows from Lemma~\ref{lem:abs-converge}.
+\end{proof}
+
+Let $\mathscr{C}$ denote any subcategory of \textbf{NVS}. We consider $\mathscr{C}_1$ to be the category of \emph{compatible couples} $(A_0,A_1)$ in $\mathscr{C}$, i.e.\ all pairs of spaces $A_0,A_1\in\mathscr{C}$ such that $A_0\cap A_1$ and $A_0+A_1$ are both objects in $\mathscr{C}$. The morphisms $T=(T_{A_0},T_{A_1})$ in this category are all bounded linear operators from $A_0+A_1$ to $B_0+B_1$ such that
+\begin{equation*}
+    T_{A_0}:A_0\to B_0 \quad \text{and} \quad T_{A_1}:A_1\to B_1
+\end{equation*}
+are both morphisms in $\mathscr{C}$, where $T_A$ denotes the restriction of $T$ to $A$. However, in the sequel, we will drop the subscript and just write $T$ to stand for restrictions to various subspaces of $A_0+A_1$. We also write $\|T\|_{A,B}$ for the operator norm of $T:A\to B$.
+
+If $x=x_0+x_1$ with $x_0\in A_0$ and $x_1\in A_1$ as above, then
+\begin{equation*}
+    \|Tx\|_{B_0+B_1} \le \|T\|_{A_0,B_0}\|x_0\|_{A_0} + \|T\|_{A_1,B_1}\|x_1\|_{A_1}.
+\end{equation*}
+Consequently
+\begin{equation*}
+    \|T\|_{A_0+A_1, B_0+B_1} \le \max\{\|T\|_{A_0,B_0}, \|T\|_{A_1,B_1}\},
+\end{equation*}
+and similarly, it is straightforward to verify
+\begin{equation*}
+    \|T\|_{A_0\cap A_1, B_0\cap B_1} \le \max\{\|T\|_{A_0,B_0}, \|T\|_{A_1,B_1}\}.
+\end{equation*}
+We can thus define two basic functors from $\mathscr{C}_1$ to $\mathscr{C}$.
+
+\begin{definition}
+We define the functors $\Sigma$ (sum) and $\Delta$ (intersection) by $\Sigma(T)=\Delta(T)=T$ for each morphism $T\in\mathscr{C}_1$, and
+\begin{equation*}
+    \Sigma(\bar{A}) = A_0+A_1 \quad \text{and} \quad \Delta(\bar{A})=A_0\cap A_1.
+\end{equation*}
+for every $\bar{A}=(A_0,A_1)\in\mathscr{C}_1$.
+\end{definition}
+
+\begin{example}
+Let $\mathscr{C}$ be the category of Banach spaces. By Lemma~\ref{lem:compatible}, we may take $\mathscr{C}_1$ to be the category of compatible pairs of Banach spaces, since if $A_0,A_1$ are compatible, then $A_0\cap A_1$ and $A_0+A_1$ are Banach spaces.
+\end{example}
+
+\subsection{Definition of interpolation spaces}
+In this section, $\mathscr{C}$ will denote any subcategory of \textbf{NVS} such that $\mathscr{C}$ is closed under sum and intersection. As above, we denote by $\mathscr{C}_1$ the category of all compatible pairs of spaces in $\mathscr{C}$.
+
+\begin{definition}
+For any pair $\bar{A}=(A_0,A_1)\in\mathscr{C}_1$, the space $A\in\mathscr{C}$ is called an \emph{intermediate space} between $A_0$ and $A_1$ if
+\begin{equation*}
+    \Delta(\bar{A}) \subseteq A \subseteq \Sigma(\bar{A})
+\end{equation*}
+with continuous inclusions. The space $A$ is called an \emph{interpolation space} (between $A_0$ and $A_1$) if in addition to being an intermediate space, we have
+\begin{equation*}
+    T:\bar{A}\to\bar{A} \implies T:A\to A.
+\end{equation*}
+\end{definition}
+
+We can extend the definition in the following way.
+\begin{definition}
+Let $\bar{A},\bar{B}$ be two couples in $\mathscr{C}_1$. We say that two spaces $A,B\in\mathscr{C}$ are \emph{interpolation spaces} with respect to $\bar{A}$ and $\bar{B}$ if $A,B$ are intermediate spaces with respect to $\bar{A},\bar{B}$ respectively, and if
+\begin{equation*}
+    T:\bar{A}\to\bar{B} \implies T:A\to B.
+\end{equation*}
+More explicitly, this means that if $T:A_0\to B_0$ and $T:A_1\to B_1$, then $T:A\to B$.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}[(i)]
+    \item If $A,B$ are interpolation spaces with respect to $\bar{A},\bar{B}$, then in general it does \emph{not} follow that $A$ is an interpolation space with respect to $\bar{A}$, nor that $B$ is an interpolation space with respect to $\bar{B}$. [\emph{Comment}: I can't be bothered at the moment to look through Aronszajn \& Gagliardo's 60+ page paper for more details on this.]
+    
+    \item Observe that $\Delta(\bar{A})$ and $\Delta(\bar{B})$ are interpolation spaces with respect to $\bar{A}$ and $\bar{B}$, and the same is true for $\Sigma(\bar{A})$ and $\Sigma(\bar{B})$.
+\end{enumerate}
+\end{remark}
+
+If $A=\Delta(\bar{A})$ (or $\Sigma(\bar{A})$) and $B=\Delta(\bar{B})$ (or $\Sigma(\bar{B})$), then it holds that
+\begin{equation}
+\label{eq:exact-interp}
+    \|T\|_{A,B} \le \max\{\|T\|_{A_0,B_0}, \|T\|_{A_1,B_1}\}
+\end{equation}
+as shown in the previous subsection. In general, if~\eqref{eq:exact-interp} holds, then we say that $A$ and $B$ are \emph{exact interpolation spaces}. However, in many cases, it is only possible to prove
+\begin{equation}
+\label{eq:unif-interp}
+    \|T\|_{A,B} \le C\max\{\|T\|_{A_0,B_0}, \|T\|_{A_1,B_1}\}
+\end{equation}
+for some constant $C>0$. In this case, we say that $A$ and $B$ are \emph{uniform interpolation spaces}.
+
+The interpolation spaces $A,B$ are said to be \emph{of exponent} $\theta$, $0\le\theta\le 1$, if 
+\begin{equation}
+\label{eq:theta}
+    \|T\|_{A,B} \le C\|T\|^{1-\theta}_{A_0,B_0}\|T\|^\theta_{A_1,B_1}.
+\end{equation}
+If $C=1$ is possible, then we say that $A,B$ are \emph{exact of exponent} $\theta$. The inequality~\ref{eq:theta} is a convexity result.
+\begin{example}
+As we will see in the next section, the space $L^p$ is an interpolation space between $L^{p_0}$ and $L^{p_1}$ and exact of exponent $\theta$, provided that
+\begin{equation*}
+    \frac{1}{p} = \frac{1-\theta}{p_0} + \frac{\theta}{p_1}.
+\end{equation*}
+This is the assertion of the Riesz-Thorin theorem (Theorem~\ref{thm:Riesz-Thorin}).
+\end{example}
+
+\begin{theorem}
+\label{thm:Banach-interp}
+In the category of Banach spaces, suppose that $A,B$ are interpolation spaces with respect to the couples $\bar{A},\bar{B}$ respectively. Then $A,B$ are uniform interpolation spaces.
+\end{theorem}
+\begin{proof}
+Consider the set $\mathcal{T}$ of all morphisms $T$ in $\mathscr{C}_1$ such that $T:\bar{A}\to\bar{B}$. In particular, this means that $T:A\to B$ is a bounded linear operator. Let $L_1$ denote $\mathcal{T}$ equipped with the norm
+\begin{equation*}
+    \|T\|_{L_1}:=\max\{\|T\|_{A,B},\|T\|_{A_0,B_0},\|T\|_{A_1,B_1}\},
+\end{equation*}
+and let $L_2$ denote $\mathcal{T}$ equipped with the norm
+\begin{equation*}
+    \|T\|_{L_2}:=\max\{\|T\|_{A_0,B_0},\|T\|_{A_1,B_1}\}.
+\end{equation*}
+It is a straightforward exercise (using the properties of intermediate spaces) to check that $L_1, L_2$ are Banach spaces with their respective norms. Thus the identity map $i:L_1\to L_2$ is a linear, bounded, bijective map. By the open mapping theorem, $i^{-1}:L_2\to L_1$ is also a bounded linear operator, and thus there exists a constant $C>0$ such that
+\begin{equation*}
+    \|T\|_{A,B} \le \|T\|_{L_1} \le C\|T\|_{L_2}
+\end{equation*}
+for all $T\in\mathcal{T}$.
+\end{proof}
+
+\subsection{Interpolation functors}
+
+One of the fundamental tasks in interpolation theory is the actual construction of interpolation spaces.
+\begin{definition}
+An \emph{interpolation functor} (or \emph{interpolation method}) on $\mathscr{C}$ is a functor $F:\mathscr{C}_1\to\mathscr{C}$ such that if $\bar{A},\bar{B}$ are couples in $\mathscr{C}_1$, then $F(\bar{A})$ and $F(\bar{B})$ are interpolation spaces with respect to $\bar{A}$ and $\bar{B}$. Moreover it holds that
+\begin{equation*}
+    F(T)=T \qquad \text{for all } T:\bar{A}\to \bar{B} \text{ in }\mathscr{C}_1.
+\end{equation*}
+We say that $F$ is a \emph{uniform} (resp.\ \emph{exact}) interpolation functor if $F(\bar{A})$ and $F(\bar{B})$ are uniform (resp.\ \emph{exact}) interpolation spaces with respect to $\bar{A}$ and $\bar{B}$. Similarly we say that $F$ is \emph{(exact) of exponent} $\theta$ if $F(\bar{A}),F(\bar{B})$ are (exact) of exponent $\theta$.
+\end{definition}
+
+Let $\bar{A}=(A_0,A_1)$ and $\bar{B}=(B_1,B_0)$ be couples in $\mathscr{C}$, and suppose $F$ is an interpolation functor. The situation is best remembered by the following diagram:
+\begin{center}
+\begin{tikzcd}
+B_0 \arrow[r, hook]                & F(\bar{B}) \arrow[r, hook]                & B_1                \\
+A_0 \arrow[u, "T"] \arrow[r, hook] & F(\bar{A}) \arrow[u, "T"] \arrow[r, hook] & A_1 \arrow[u, "T"]
+\end{tikzcd}
+\end{center}
+
+\begin{example}
+The simplest interpolation functors are of course $\Delta$ and $\Sigma$. These functors are exact (recall~\eqref{eq:exact-interp}) on any admissible subcategory $\mathscr{C}$ of the category of normed vector spaces.
+\end{example}
+
+\begin{remark}
+By Theorem~\ref{thm:Banach-interp}, any interpolation functor in the category of Banach spaces is uniform. In particular, we have the estimate
+\begin{equation*}
+    \|T\|_{F(\bar{A}),F(\bar{B})} \le C\max\{\|T\|_{A_0,B_0}, \|T\|_{A_1,B_1}\}
+\end{equation*}
+for some constant $C>0$ possibly dependent on the couples $\bar{A},\bar{B}$. In general, if $C$ can be chosen independently of the couples, we say that $F$ is a \emph{bounded interpolation functor}.
+\end{remark}

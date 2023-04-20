@@ -1,0 +1,179 @@
+\section{The Riesz-Thorin theorem}
+Main reference: Grafakos, \emph{Classical Fourier Analysis}.
+
+\begin{lemma}[Hadamard `three-lines lemma']
+\label{lem:three-lines}
+Let $F$ be analytic in the open strip $S=\{z\in\CC:0<\mathrm{Re}(z)<1\}$, and continuous and bounded on the closure $\bar{S}$. Assume moreover that $|F(z)|\le B_0$ when $\mathrm{Re}(z)=0$ and $|F(z)|\le B_1$ when $\mathrm{Re} (z)=1$ for some constants $0<B_0,B_1<\infty$. Then
+\begin{equation*}
+    |F(z)| \le B_0^{1-\theta}B_1^\theta
+\end{equation*}
+when $\mathrm{Re}(z)=\theta$, for any $\theta\in [0,1]$.
+\end{lemma}
+\begin{proof}
+Since $B_0, B_1>0$, the functions $B_0^{1-z}=B_0\exp(-z\log B_0)$ and $B_1^z=\exp(z\log B_1)$ are analytic in $S$. For all $z=x+iy\in \bar{S}$, we also observe the uniform lower bounds
+\begin{equation*}
+    |B_0^{1-z}| = B_0 e^{-x\log B_0} \ge \min\{1,B_0\} \qquad |B_1^z| = e^{x\log B_1} \ge \min\{1,B_1\}.
+\end{equation*}
+Hence
+\begin{equation*}
+    G(z):=F(z)(B_0^{1-z}B_1^z)^{-1}
+\end{equation*}
+is analytic in $S$. Let $G_n(z):=G(z)e^{(z^2-1)/n}$ for each $n\in\NN$. Since $F$ is bounded on $\bar{S}$ and $|B_0^{1-z}B_1^z| > 0$ for all $z\in\bar{S}$ as shown above, we conclude that $|G|$ is bounded by some constant $M$ in $\bar{S}$. Since
+\begin{equation*}
+    |G_n(x+iy)| \le Me^{-y^2/n}e^{(x^2-1)/n} \le Me^{-y^2/n},
+\end{equation*}
+we find that for fixed $n\in\NN$, $G_n(x+iy) \to 0$ uniformly for $x\in [0,1]$ as $|y|\to \infty$. Now choose $R=R(n)>0$ large enough so that $|G_n|\le 1$ for all $x\in [0,1]$ and $|y|\ge R$. The assumptions on $F$ also imply that $|G_n|\le 1$ on the two lines $\mathrm{Re}(z)=0$ and $\mathrm{Re}(z)=1$ which form the boundary of $S$. Now the maximum modulus principle implies that $|G_n|\le 1$ in the rectangle $[0,1]\times [-R,R]$, and thus $|G_n|\le 1$ on $\bar{S}$. Then we can take $n\to\infty$ to conclude that $|G|\le 1$ on $\bar{S}$. Finally, setting $z=\theta+it$, we deduce
+\begin{equation*}
+    |F(\theta+it)| \le |B_0^{1-\theta-it}B_1^{\theta+it}|=B_0^{1-\theta}B_1^\theta
+\end{equation*}
+which completes the proof.
+\end{proof}
+
+\begin{theorem}[Riesz-Thorin interpolation]
+\label{thm:Riesz-Thorin}
+Let $(X,\mu), (Y,\nu)$ be $\sigma$-finite measure spaces. Suppose $T$ is a linear operator defined for measurable functions on $X$ with values in the measurable functions on $Y$. Let $1\le p_0,p_1,q_0,q_1 \le\infty$ and assume
+$T:L^{p_0}(X)\to L^{q_0}(Y)$ is bounded with norm $\|T\|_{p_0\to q_0}=M_0$, and $T:L^{p_1}(X)\to L^{q_1}(Y)$ is bounded with norm $\|T\|_{p_1\to q_1}=M_1$. Then for all $\theta\in [0,1]$ it holds that
+\begin{equation}
+\label{eq:Tpq}
+    \|T\|_{p\to q} \le M_0^{1-\theta}M_1^\theta
+\end{equation}
+where
+\begin{equation}
+\label{eq:pq-interp}
+    \frac{1}{p}=\frac{1-\theta}{p_0}+\frac{\theta}{p_1}, \qquad \frac{1}{q}=\frac{1-\theta}{q_0}+\frac{\theta}{q_1}.
+\end{equation}
+\end{theorem}
+
+\begin{remark}
+The inequality~\eqref{eq:Tpq} shows that the operator norm $M$, when seen as a `function' of $1/p$, is log-convex (i.e.\ $\log M$ is convex). The equations~\eqref{eq:pq-interp} and thus the result of the Theorem can be easily remembered in the following way: let's say that a point $(1/p,1/q)$ in the plane is a `mapping pair' for $T$ if $T:L^p \to L^q$ is a bounded linear operator. Thus if $X_0=(1/p_0,1/q_0)$ and $X_1=(1/p_1,1/q_1)$ are mapping pairs, then every point in the line segment joining $X_0$ to $X_1$ is also a mapping pair.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:Riesz-Thorin}]
+We first recall that
+\begin{equation*}
+    \|Tf\|_{L^q(Y,\nu)} = \sup\left\{ \left|\int_Y (Tf)(y)g(y)\,\nu(dy)\right| : g\in L^{q'}(Y,\nu), \|g\|_{L^{q'}}\le 1 \right\}
+\end{equation*}
+(a consequence of the Riesz representation theorem and a standard duality result from functional analysis). It suffices to prove
+\begin{equation*}
+    \|Tf\|_q \le M_0^{1-\theta}M_1^\theta\|f\|_p
+\end{equation*}
+for all \emph{simple functions} $f$, that is, $f$ of the form
+\begin{equation*}
+    f = \sum_{k=1}^m a_k e^{i\alpha_k} \mathbf{1}_{A_k}
+\end{equation*}
+where $a_k>0, \alpha_k\in\RR$, and the sets $A_k \subset X$ are pairwise disjoint with finite $\mu$-measure. The general case follows immediately, since simple functions are dense in $L^p(X,\mu)$ and $L^q(Y,\nu)$.
+
+Let $f\in L^p(X)$ and $g\in L^{q'}(Y)$ be simple functions, hence
+\begin{equation*}
+    f = \sum_{k=1}^m a_k e^{i\alpha_k} \mathbf{1}_{A_k}, \quad g = \sum_{j=1}^n b_j e^{i\beta_j} \mathbf{1}_{B_j}
+\end{equation*}
+where $b_j>0, \beta_j\in\RR$, and the sets $B_j \subset Y$ are pairwise disjoint with finite $\nu$-measure. Now let
+\begin{equation*}
+    P(z):=\frac{p}{p_0}(1-z) +\frac{p}{p_1}z, \qquad Q(z):=\frac{q'}{q_0'}(1-z) +\frac{q'}{q_1'}z.
+\end{equation*}
+For $z$ in the closed strip $\bar{S}=\{z\in\CC: 0\le\mathrm{Re}(z)\le 1\}$, we define
+\begin{equation*}
+    f_z:=\sum_{k=1}^m a_k^{P(z)}e^{i\alpha_k}\mathbf{1}_{A_k}, \qquad g_z:=\sum_{j=1}^n b_j^{Q(z)}e^{i\beta_j}\mathbf{1}_{B_j},
+\end{equation*}
+and
+\begin{equation*}
+    F(z):=\int_Y (Tf_z)(y)g_z(y)\,\nu(dy).
+\end{equation*}
+We have $f_\theta=f$ and $g_\theta=g$ due to~\eqref{eq:pq-interp}. By linearity, we obtain
+\begin{equation*}
+    F(z)=\sum_{k=1}^m \sum_{j=1}^n a_k^{P(z)}b_j^{Q(z)}e^{i\alpha_k}e^{i\beta_j} \int_Y (T\mathbf{1}_{A_k})(y)\mathbf{1}_{B_j}(y)\,\nu(dy).
+\end{equation*}
+A simple application of H\"{o}lder's inequality and the assumption that $\|T\|_{p_m\to q_m}=M_m, m\in\{0,1\}$, shows that
+\begin{equation*}
+    \int_Y (T\mathbf{1}_{A_k}) \mathbf{1}_{B_j} \,d\nu \le M_m \mu(A_k)^{1/p_m}\nu(B_j)^{1/q_m'}, \qquad m\in\{0,1\}.
+\end{equation*}
+Using the disjointness of the sets $A_k$ and $|a_k^{P(it)}|=a_k^{p/p_0}$, we find
+\begin{equation*}
+    \|f_{it}\|_{p_0} = \|f\|_{p}^{p/p_0}.
+\end{equation*}
+(and note that this holds even for $p_0=\infty$). Similarly, the disjointness of the sets $B_j$ and $|b_j^{Q(it)}|=b_j^{q'/q_0'}$ imply
+\begin{equation*}
+    \|g_{it}\|_{q_0'} = \|g\|_{q'}^{q'/q_0'}
+\end{equation*}
+(which is valid even for $q_0=1$, i.e.\ $q_0'=\infty$). Thus by H\"{o}lder's inequality and the assumptions, we obtain
+\begin{equation}
+\label{eq:F-it-bound}
+    |F(it)|\le \|Tf_{it}\|_{q_0}\|g_{it}\|_{q_0'}\le M_0\|f_{it}\|_{p_0}\|g_{it}\|_{q_0'}\le M_0\|f\|_p^{p/p_0}\|g\|_{q'}^{q'/q_0'}.
+\end{equation}
+By similar calculations, we obtain
+\begin{equation*}
+    \|f_{1+it}\|_{p_1}=\|f\|_p^{p/p_1}, \qquad \|g_{1+it}\|_{q_1'}=\|g\|_{q'}^{q'/q_1'},
+\end{equation*}
+(valid even for $p_1=\infty$ and $q_1'=\infty$), and therefore
+\begin{equation}
+\label{eq:F-1+it-bound}
+    |F(1+it)|\le M_1\|f\|_p^{p/p_1}\|g\|_{q'}^{q'/q_1'}
+\end{equation}
+in analogy with~\eqref{eq:F-it-bound}.
+
+Finally, since $a_k,b_j>0$, it follows that $F$ is analytic in $S$, and bounded and continuous on $\bar{S}$. Combining estimates~\eqref{eq:F-it-bound}, \eqref{eq:F-1+it-bound} and Lemma~\ref{lem:three-lines}, we deduce
+\begin{equation*}
+    |F(z)|\le \left(M_0\|f\|_p^{p/p_0}\|g\|_{q'}^{q'/q_0'}\right)^{1-\theta} \left(M_1\|f\|_p^{p/p_1}\|g\|_{q'}^{q'/q_1'}\right)^\theta = M_0^{1-\theta}M_1^\theta \|f\|_p\|g\|_{q'}
+\end{equation*}
+when $\mathrm{Re}(z)=\theta$. Since $P(\theta)=Q(\theta)=1$, it follows that
+\begin{equation*}
+    |F(\theta)|= \left|\int_Y (Tf)g\,d\nu\right| \le M_0^{1-\theta}M_1^\theta \|f\|_p\|g\|_{q'}.
+\end{equation*}
+Taking the supremum over all simple functions $g\in L^{q'}$ with $\|g\|_{q'}\le 1$, we conclude the proof.
+\end{proof}
+
+We now give some applications of the Riesz-Thorin theorem. Let $X=Y=\RR^n$ with $\mu=\nu=dx$, the Lebesgue measure. We consider the Fourier transform $\mathcal{F}$ defined by
+\begin{equation*}
+    \mathcal{F}[f](\xi):=\frac{1}{(2\pi)^{n/2}}\int f(x)e^{-ix\cdot\xi}\,dx.
+\end{equation*}
+It is obvious that $\mathcal{F}$ maps $L^1$ into $L^\infty$. Moreover, it is well-known that $\mathcal{F}$ extends to an operator on $L^2$, and Plancherel's theorem states that $\mathcal{F}$ is an isometry on $L^2$. Hence
+\begin{align*}
+    \mathcal{F}:L^1 \to L^\infty \quad & \text{with norm }\frac{1}{(2\pi)^{n/2}}, \\
+    \mathcal{F}:L^2 \to L^2 \quad & \text{with norm }1.
+\end{align*}
+
+\begin{theorem}[Hausdorff-Young inequality]
+If $1\le p\le 2$, then $\mathcal{F}:L^p\to L^{p'}$ (where $1/p+1/p'=1$ as usual), with the estimate
+\begin{equation}
+    \|\mathcal{F}f\|_{p'} \le (2\pi)^{-n/p'}\|f\|_p.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We apply the Riesz-Thorin theorem with $p_0=q_0=2$ and $p_1=1,q_1=\infty$. Thus $\mathcal{F}:L_p \to L_q$ with
+\begin{equation*}
+    \frac{1}{p}=\frac{1-\theta}{2}+\frac{\theta}{1}, \quad \frac{1}{q}=\frac{1-\theta}{2}+\frac{\theta}{\infty} \quad (0<\theta<1).
+\end{equation*}
+It follows that $\frac{1}{p}+\frac{1}{q}=1$, which yields $q=p'$. The norm of $\mathcal{F}:L^p\to L^{p'}$ is therefore bounded above by
+\begin{equation*}
+    \frac{1}{(2\pi)^{\frac{n(1-\theta)}{2}}}\cdot 1^{\theta} = (2\pi)^{-n/p'}
+\end{equation*}
+which proves the theorem.
+\end{proof}
+
+\begin{theorem}[Young's inequality for convolutions]
+If $k\in L^q$ and $f\in L^p$, where $1<p<q'$, then $k*f \in L^r$ for $\frac{1}{r}=\frac{1}{p}-\frac{1}{q'}$ (equivalently $\frac{1}{r}+1=\frac{1}{p}+\frac{1}{q}$), and
+\begin{equation*}
+    \|k*f\|_r \le \|k\|_q \|f\|_p.
+\end{equation*}
+\end{theorem}
+
+\begin{proof}
+By Minkowski's convolution inequality (see e.g.\ Grafakos Theorem 1.2.10), we have
+\begin{equation*}
+    \|k*f\|_q \le \|k\|_q \|f\|_1.
+\end{equation*}
+On the other hand, H\"{o}lder's inequality yields
+\begin{equation*}
+    \|k*f\|_\infty \le \|k\|_q \|f\|_{q'}.
+\end{equation*}
+Therefore, by Riesz-Thorin interpolation, we see that the convolution $T:f \mapsto k*f$ is a map $L^p\to L^r$ where
+\begin{equation*}
+    \frac{1}{p}=\frac{1-\theta}{1}+\frac{\theta}{q'}=1-\frac{\theta}{q}, \quad \frac{1}{r}=\frac{1-\theta}{q}+\frac{\theta}{\infty}.
+\end{equation*}
+Therefore $\frac{\theta}{q}=1-\frac{1}{p}=\frac{1}{q}-\frac{1}{r}$, which gives $\frac{1}{r}=\frac{1}{p}-(1-\frac{1}{q})=\frac{1}{p}-\frac{1}{q'}$. We conclude
+\begin{equation*}
+    \|k*f\|_r \le \|k\|_q\|f\|_p
+\end{equation*}
+as claimed.
+\end{proof}

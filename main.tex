@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{newpxtext}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm,marginparwidth=2cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath, amsthm, amssymb, mathrsfs}
+\usepackage{enumerate, braket}
+\usepackage{xcolor, graphicx, tikz}
+\usetikzlibrary{cd}
+%\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{urlcolor=magenta, linkcolor=blue, citecolor=red}
+
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}{Corollary}[theorem]
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+%%% Math operators
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\rg}{rg}
+
+%%% Shortcuts
+\newcommand{\p}{\partial}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+
+\title{\textbf{Interpolation Theory: a Beginner's Guide}}
+\author{Jonathan Mui}
+\date{last updated: 20 April 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\include{1-general-properties}
+
+\include{2-riesz-thorin}
+
+\end{document}
